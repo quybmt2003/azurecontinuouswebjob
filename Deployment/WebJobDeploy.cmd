@@ -8,10 +8,10 @@ echo "Building on %gitroot%"
 pushd %cd%
 cd %gitroot% 
 
-msbuild .\WebjobContinuous.sln /p:DeployOnBuild=true;PublishProfile=Debug;AllowUntrustedCertificate=true;User=$asmgendev;Password=AbhgF6RBEsFJoJbrewdB3xxXhXg8lM8RC9Znh2oCF7KfQj4T6rlz3gpc8Xnq;Configuration=Debug;Platform="Any CPU"
+msbuild .\WebjobContinuous.sln /p:DeployOnBuild=true;PublishProfile=Testing;AllowUntrustedCertificate=true;User=$asmgendev;Password=Ei8hd8QjefeL3tatfPnopBbqCcElmdMiuo9qSl6Rl4fwrixlB4LMNfkeieKm;Configuration=Testing;Platform="Any CPU"
 IF %ERRORLEVEL% NEQ 0 GOTO $ERROR
 
-"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:package="%gitroot%\WebjobContinuous\bin\WebjobContinuous.zip" -dest:auto,ComputerName="https://asmgendev.azurewebsites.net:443/msdeploy.axd?site=asmgendev",User=$asmgendev;Password=AbhgF6RBEsFJoJbrewdB3xxXhXg8lM8RC9Znh2oCF7KfQj4T6rlz3gpc8Xnq,AuthType="Basic" -setParam:name="IIS Web Application Name",value="asmgendev" -enableRule:DoNotDeleteRule
+"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:package="%gitroot%\WebjobContinuous\bin\WebjobContinuous.zip" -dest:auto,ComputerName="https://asmgendev.azurewebsites.net:443/msdeploy.axd?site=asmgendev",UserName="$asmgendev";Password="Ei8hd8QjefeL3tatfPnopBbqCcElmdMiuo9qSl6Rl4fwrixlB4LMNfkeieKm",AuthType="Basic" -setParam:name="IIS Web Application Name",value="asmgendev" -enableRule:DoNotDeleteRule
 IF %ERRORLEVEL% NEQ 0 GOTO $ERROR
 
 
